@@ -25,8 +25,6 @@ function saveDetails(message) {
     chrome.storage.local.set({
         [key]: message
     })
-
-
 }
 
 chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
@@ -40,9 +38,6 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
         
         // console.log("details are sent to the popup", details)
     }
-
-    
-
 
 });
 
@@ -70,9 +65,6 @@ function fetchDetails() {
         console.log("Printing from fetchDetails()", items); 
         // toCSV(items)
     });
-
-    
-   
 
 }
 

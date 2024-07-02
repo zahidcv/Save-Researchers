@@ -18,8 +18,14 @@ chrome.runtime.onMessage.addListener((message) => {
     showTable(message.content)
 
     exportBtn = document.getElementById('export-btn')
+    clarBtn = document.getElementById('clear-btn')
+
     exportBtn.addEventListener("click", () => {
       exportCSV(message.content)
+    })
+
+    clarBtn.addEventListener("click", () => {
+      clearCSV()
     })
   }
 
@@ -94,11 +100,11 @@ function downloadCSV(csvString) {
   const date = today.getDate();
   const hour = today.getHours();
   const minute = today.getMinutes();
-  const year  = today.getFullYear();
+  const year = today.getFullYear();
 
   const month = today.getMonth() + 1;
 
-  const filename = "Researchers list " + minute + ":" + hour + "__" +date + "_" + month + "_"+year
+  const filename = "Researchers list " + minute + ":" + hour + "__" + date + "_" + month + "_" + year
 
   const blob = new Blob([csvString], {
     type: "text/csv;charset=utf-8;"
@@ -115,26 +121,12 @@ function downloadCSV(csvString) {
 }
 
 
-// console.log("hello from pop up")
-// chrome.runtime.onMessage.addListener(function (message) {
-//   // Handle the message received from the background script
-//   console.log("message recived in the popup js: ", message)
-
-
-//   document.getElementById("researcher").innerText = message.Researcher
-//   document.getElementById("university").innerText = message.University
-//   document.getElementById("homepage").innerText = message.Homepage
-//   document.getElementById("scholar").innerText = message.Scholar
-// })
-
-// const submitBtn = document.getElementById("submitBtn")
-// submitBtn.addEventListener("click", function () {
-//   const topicinput = document.getElementById("topicinput").value
-//   // Send the user input to the background script
-//   chrome.runtime.sendMessage({
-//     topicinput: topicinput
-//   })
-//   // Close the popup
-//   document.getElementById("topic").innerText = topicinput
-//   // window.close()
-// })
+function clearCSV() {
+  chrome.storage.local.clear(function () {
+    var error = chrome.runtime.lastError;
+    if (error) {
+      console.error(error);
+    }
+  });
+  chrome.storage.sync.clear();
+}

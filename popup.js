@@ -104,7 +104,7 @@ function downloadCSV(csvString) {
 
   const month = today.getMonth() + 1;
 
-  const filename = "Researchers list " + minute + ":" + hour + "__" + date + "_" + month + "_" + year
+  const filename = "Researchers list " + hour + "_" + minute + "__" + date + "_" + month + "_" + year
 
   const blob = new Blob([csvString], {
     type: "text/csv;charset=utf-8;"
